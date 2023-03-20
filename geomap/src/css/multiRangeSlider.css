@@ -1,8 +1,13 @@
 .container {
-    height: 200px;
+    height: 50px;
     display: flex;
     align-items: center;
     justify-content: center;
+  }
+
+  .slider_name {
+    position: absolute;
+    height: 50px;
   }
   
   .slider {
@@ -38,11 +43,11 @@
   .slider__right-value {
     color: #063e75;
     font-size: 12px;
-    margin-top: 15px;
+    margin-top: 12px;
   }
   
   .slider__left-value {
-    left: 6px;
+    left: 0px;
   }
   
   .slider__right-value {

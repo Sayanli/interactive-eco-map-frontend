@@ -78,14 +78,20 @@ function CustomSidebar() {
 
             <SubMenu defaultOpen label={"Professors"} icon={<RiTeamLine />}>
               <MenuItem>
-                  <h1 label={"sdadasdas"}></h1>
-                <MultiRangeSlider min={0} max={1000} onChange={({ min, max }) => console.log(`mint = ${min}, maxt = ${max}`)} />
-      
+                <MultiRangeSlider name={"Winter"} min={0} max={1000} onChange={({ min, max }) => console.log(`mint = ${min}, maxt = ${max}`)}/>
+              </MenuItem>
+              <MenuItem>
+                <MultiRangeSlider name={"Spring"} min={0} max={1000} onChange={({ min, max }) => console.log(`mint = ${min}, maxt = ${max}`)}/>
+              </MenuItem>
+              <MenuItem>
+                <MultiRangeSlider name={"Summer"} min={0} max={1000} onChange={({ min, max }) => console.log(`mint = ${min}, maxt = ${max}`)}/>
+              </MenuItem>
+              <MenuItem>
+                <MultiRangeSlider name={"Autumn"} min={0} max={1000} onChange={({ min, max }) => console.log(`mint = ${min}, maxt = ${max}`)}/>
               </MenuItem>
               <MenuItem icon={<RiUserUnfollowLine />}>Ex Professors</MenuItem>
               <MenuItem icon={<RiCalendar2Line />}>Probation Period</MenuItem>
             </SubMenu>
-
             <SubMenu defaultOpen label={"Records"} icon={<RiFolder2Line />}>
               <MenuItem icon={<RiStackLine />}>Senior Students</MenuItem>
               <MenuItem icon={<RiPlantLine />}>Junior Students</MenuItem>
