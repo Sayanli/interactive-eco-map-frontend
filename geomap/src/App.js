@@ -1,25 +1,34 @@
-import logo from './logo.svg';
-import './App.css';
+import React from 'react';
+import CustomSidebar from './Components/Sidebar';
+import MapYa from './Components/MapYa';
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+
+  
+function App(){
+    const points = [
+    {
+      id: "1",
+      coordinates: [61.703602, 30.680139],
+      title: "Железнодорожная станция"
+    },
+    {
+      id: "2",
+      coordinates: [61.699623, 30.690952],
+      title: "Пристань Метеоров"
+    },
+    {
+      id: "3",
+      coordinates: [61.705707, 30.672616],
+      title: "Парк Ваккасалми"
+    }
+  ];
+
+      return(
+        <div>
+          <CustomSidebar />
+          <MapYa points={points}/>
+        </div>
+      )
 }
 
-export default App;
+export default App
