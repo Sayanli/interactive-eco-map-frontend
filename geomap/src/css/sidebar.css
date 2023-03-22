@@ -20,7 +20,12 @@ a:hover {
 }
 
 button {
-  right: 20px;
+  height: 50px;
+  width: 250px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #72e9a8 !important;
 }
 hr {
   margin-top: 0px;

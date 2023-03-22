@@ -7,11 +7,7 @@ class Header extends React.Component{
       return(
         <>
           <header>Шапка сайта</header>
-          <MultiRangeSlider
-            min={0}
-            max={1000}
-            onChange={({ min, max }) => console.log(`mint = ${min}, maxt = ${max}`)}
-          />
+          <MultiRangeSlider min={0} max={1000} onChange={({ min, max }) => console.log(`mint = ${min}, maxt = ${max}`)} />
           <MultiRangeSlider
             min={0}
             max={1000}
