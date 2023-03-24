@@ -2,10 +2,11 @@ import React from 'react';
 import { useState } from 'react';
 import CustomSidebar from './Sidebar';
 import MapYa from './MapYa';
-import LogRegButtons from './LogRegButtons';
+import {LogRegButtons, LogoutButton} from './LogRegButtons';
 
 function Main(){
-
+    
+    const isAuth = localStorage.getItem('token')
     const [points, setPoints] = useState([]) //points
     
     const handleChange = (value) => {
@@ -15,7 +16,8 @@ function Main(){
 
       return(
         <div>
-          <LogRegButtons/>
+          {!isAuth && <LogRegButtons />}
+          {isAuth && <LogoutButton />}
           <CustomSidebar handleChangeProp={handleChange} />
 
           <MapYa points={points}/>
