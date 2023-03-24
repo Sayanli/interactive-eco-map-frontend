@@ -1,6 +1,6 @@
 import React from "react";
 import "../css/logregbuttons.css";
-import { Link, redirect } from "react-router-dom";
+import { Link  } from "react-router-dom";
 import { logout } from '../Reducers/userReducer'
 import { useDispatch } from "react-redux";
 
@@ -18,7 +18,11 @@ export function LogoutButton() {
 
     return(
             <div className="buttons">
-                <button onClick={() => dispatch(logout(), window.location.reload())} className="bLR">Logout</button>
+                 <Link to="/" className="bLR">
+                    <text onClick={() => dispatch(logout())} >
+                        Logout
+                    </text>
+                </Link>
             </div>
     )
 }
