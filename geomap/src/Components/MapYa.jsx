@@ -1,5 +1,6 @@
 import React from "react";
 import { YMaps, Map, ObjectManager } from "@pbe/react-yandex-maps";
+import { FaBeer } from "react-icons/fa";
 
 const MapYa = ({ points }) => {
 
@@ -21,16 +22,33 @@ const MapYa = ({ points }) => {
         },
 
         properties: {
-          balloonContent: `
+          balloonContentHeader:`
           <div>
-             <div>${point.city}</div>
-             <div>Средняя температура весной: ${point.average_spring_temp}</div>
-             <div>Средняя температура летом: ${point.average_summer_temp}</div>
-             <div>Средняя температура осенью: ${point.average_autumn_temp}</div>
-             <div>Кирилл гей</div>
-             <div>Средняя температура зимой: ${point.average_winter_temp}</div>
-             <div>Влажность воздуха: ${point.humidity}</div>
-             <div>Уровень загрязнения воздуха: ${point.air_pollution}</div>
+              <img src="https://img.icons8.com/bubbles/256/city.png" width="35" height="35" alt=""/>
+              <a>${point.city}</a><br>
+          </div>
+          `,
+          balloonContentBody: `
+             <div>
+              <img src="https://img.icons8.com/bubbles/256/springtime.png" width="35" height="35" alt=""/>
+              Средняя температура весной: ${point.average_spring_temp}
+             </div>
+             <div>
+                <img src="https://img.icons8.com/bubbles/256/summertime.png" width="35" height="35" alt=""/>
+                Средняя температура летом: ${point.average_summer_temp}
+             </div>
+             <div>
+                <img src="https://img.icons8.com/bubbles/256/autumntime.png" width="35" height="35" alt=""/>
+                Средняя температура осенью: ${point.average_autumn_temp}
+             </div>
+             <div>
+                <img src="https://img.icons8.com/bubbles/256/wintertime.png" width="35" height="35" alt=""/>
+                Средняя температура зимой: ${point.average_winter_temp}
+             </div>
+             <div>
+                <img src="https://img.icons8.com/bubbles/256/water.png" width="35" height="35" alt=""/>
+                Влажность воздуха(%): ${point.humidity}
+             </div>
 
           </div>
         `,

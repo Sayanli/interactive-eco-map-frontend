@@ -25,8 +25,6 @@ const CustomSidebar = (props) => {
   const [winterTempMore, setWinterTempMore] = useState(-100)
   const [winterTempLess, setWinterTempLess] = useState(100)
 
-  const [airPollutionMore, setAirPollutionMore] = useState(0)
-  const [airPollutionLess, setAirPollutionLess] = useState(1000)
 
   const [humidityMore, setHumidityMore] = useState(0)
   const [humidityLess, setHumidityLess] = useState(100)
@@ -58,8 +56,6 @@ const CustomSidebar = (props) => {
       autumn_temp_less: autumnTempLess,
       winter_temp_more: winterTempMore,
       winter_temp_less: winterTempLess,
-      air_pollution_more: airPollutionMore,
-      air_pollution_less: airPollutionLess,
       humidity_more: humidityMore,
       humidity_less: humidityLess
     }).then((response) => {
@@ -110,10 +106,6 @@ const CustomSidebar = (props) => {
 
           <Menu>
 
-            <MenuItem>
-              <MultiRangeSlider name={"Качество воздуха"} min={0} max={1000} onChange={({ min, max }) => { setAirPollutionMore(min); setAirPollutionLess(max);}}/>
-            </MenuItem>
-
             <SubMenu defaultOpen label={"Средняя температура"}>
               <MenuItem>
                   <MultiRangeSlider name={"Зима"} min={-100} max={100} onChange={({ min, max }) => { setWinterTempMore(min); setWinterTempLess(max);}}/>
@@ -130,7 +122,7 @@ const CustomSidebar = (props) => {
             </SubMenu>
 
             <MenuItem>
-                  <MultiRangeSlider name={"Влажность воздуха"} min={0} max={100} onChange={({ min, max }) => { setHumidityMore(min); setHumidityLess(max);}}/>
+                  <MultiRangeSlider name={"Качество воздуха"} min={0} max={1000} onChange={({ min, max }) => { setHumidityMore(min); setHumidityLess(max);}}/>
             </MenuItem>
 
             <MenuItem>
