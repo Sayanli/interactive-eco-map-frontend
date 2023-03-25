@@ -1,5 +1,5 @@
 import React from "react";
-import { YMaps, Map, ObjectManager, Placemark } from "@pbe/react-yandex-maps";
+import { YMaps, Map, ObjectManager } from "@pbe/react-yandex-maps";
 
 const MapYa = ({ points }) => {
 
@@ -22,7 +22,17 @@ const MapYa = ({ points }) => {
 
         properties: {
           balloonContent: `
-          <div>${point.city}</div>
+          <div>
+             <div>${point.city}</div>
+             <div>Средняя температура весной: ${point.average_spring_temp}</div>
+             <div>Средняя температура летом: ${point.average_summer_temp}</div>
+             <div>Средняя температура осенью: ${point.average_autumn_temp}</div>
+             <div>Кирилл гей</div>
+             <div>Средняя температура зимой: ${point.average_winter_temp}</div>
+             <div>Влажность воздуха: ${point.humidity}</div>
+             <div>Уровень загрязнения воздуха: ${point.air_pollution}</div>
+
+          </div>
         `,
           clusterCaption: `Метка №${id + 1}`
         }

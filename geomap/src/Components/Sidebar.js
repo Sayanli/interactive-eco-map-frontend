@@ -1,7 +1,6 @@
 import "../css/sidebar.css";
 import React, { useState } from "react";
 import MultiRangeSlider from "./MultiRangeSlider";
-import { RiHome4Line, RiTeamLine, RiCalendar2Line,  RiFolder2Line, RiUserFollowLine, RiPlantLine, RiStackLine, RiUserUnfollowLine } from "react-icons/ri";
 import { FiChevronsLeft, FiChevronsRight } from "react-icons/fi/";
 import { Sidebar, SubMenu, Menu, MenuItem } from "react-pro-sidebar";
 import axios from "axios";
@@ -13,6 +12,28 @@ const CustomSidebar = (props) => {
   
   const [collapsed, setCollapsed] = useState(false);
   const [toggled, setToggled] = useState(false);
+
+  const [springTempMore, setSpringTempMore] = useState(-100)
+  const [springTempLess, setSpringTempLess] = useState(100)
+
+  const [summerTempMore, setSummerTempMore] = useState(-100)
+  const [summerTempLess, setSummerTempLess] = useState(100)
+
+  const [autumnTempMore, setAutumnTempMore] = useState(-100)
+  const [autumnTempLess, setAutumnTempLess] = useState(100)
+
+  const [winterTempMore, setWinterTempMore] = useState(-100)
+  const [winterTempLess, setWinterTempLess] = useState(100)
+
+  const [airPollutionMore, setAirPollutionMore] = useState(0)
+  const [airPollutionLess, setAirPollutionLess] = useState(1000)
+
+  const [humidityMore, setHumidityMore] = useState(0)
+  const [humidityLess, setHumidityLess] = useState(100)
+
+  const [cityQualityIndexMore, setCityQualityIndexMore] = useState(0)
+  const [cityQualityIndexLess, setCityQualityIndexLess] = useState(360)
+
   const handleCollapsedChange = () => {
     setCollapsed(!collapsed);
   };
@@ -27,6 +48,27 @@ const CustomSidebar = (props) => {
     })
   }
 
+  function post_query(){
+    axios.post('http://localhost:3001/api/filter', {
+      spring_temp_more: springTempMore,
+      spring_temp_less: springTempLess,
+      summer_temp_more: summerTempMore,
+      summer_temp_less: summerTempLess,
+      autumn_temp_more: autumnTempMore,
+      autumn_temp_less: autumnTempLess,
+      winter_temp_more: winterTempMore,
+      winter_temp_less: winterTempLess,
+      air_pollution_more: airPollutionMore,
+      air_pollution_less: airPollutionLess,
+      humidity_more: humidityMore,
+      humidity_less: humidityLess
+    }).then((response) => {
+      props.handleChangeProp(response.data.data);
+    }, (error) => {
+      console.log(error);
+    });
+  }
+
   return (
     <div>
       <Sidebar
@@ -36,6 +78,7 @@ const CustomSidebar = (props) => {
         toggled={toggled}
         handleToggleSidebar={handleToggleSidebar}
         handleCollapsedChange={handleCollapsedChange}
+        backgroundColor={"white"}
       >
         <main>
           <Menu>
@@ -52,44 +95,52 @@ const CustomSidebar = (props) => {
                 <div
                   style={{
                     padding: "9px",
-                    // textTransform: "uppercase",
+                    textTransform: "uppercase",
                     fontWeight: "bold",
                     fontSize: 14,
                     letterSpacing: "1px"
                   }}
                 >
-                  ECOMAP
+                  ecomap
                 </div>
               </MenuItem>
             )}
-            <hr />
+            <hr/>
           </Menu>
 
           <Menu>
 
-            <MenuItem icon={<RiHome4Line />}>Dashboard</MenuItem>
+            <MenuItem>
+              <MultiRangeSlider name={"Качество воздуха"} min={0} max={1000} onChange={({ min, max }) => { setAirPollutionMore(min); setAirPollutionLess(max);}}/>
+            </MenuItem>
 
-            <SubMenu defaultOpen label={"Professors"} icon={<RiTeamLine />}>
+            <SubMenu defaultOpen label={"Средняя температура"}>
               <MenuItem>
-                <MultiRangeSlider name={"Winter"} min={0} max={1000} onChange={({ min, max }) => console.log(`mint = ${min}, maxt = ${max}`)}/>
+                  <MultiRangeSlider name={"Зима"} min={-100} max={100} onChange={({ min, max }) => { setWinterTempMore(min); setWinterTempLess(max);}}/>
               </MenuItem>
               <MenuItem>
-                <MultiRangeSlider name={"Spring"} min={0} max={1000} onChange={({ min, max }) => console.log(`mint = ${min}, maxt = ${max}`)}/>
+                  <MultiRangeSlider name={"Осень"} min={-100} max={100} onChange={({ min, max }) => { setAutumnTempMore(min); setAutumnTempLess(max);}}/>
               </MenuItem>
               <MenuItem>
-                <MultiRangeSlider name={"Summer"} min={0} max={1000} onChange={({ min, max }) => console.log(`mint = ${min}, maxt = ${max}`)}/>
+                  <MultiRangeSlider name={"Лето"} min={-100} max={100} onChange={({ min, max }) => { setSummerTempMore(min); setSummerTempLess(max);}}/>
               </MenuItem>
               <MenuItem>
-                <MultiRangeSlider name={"Autumn"} min={0} max={1000} onChange={({ min, max }) => console.log(`mint = ${min}, maxt = ${max}`)}/>
+                  <MultiRangeSlider name={"Весна"} min={-100} max={100} onChange={({ min, max }) => { setSpringTempMore(min); setSpringTempLess(max);}}/>
               </MenuItem>
-              <MenuItem icon={<RiUserUnfollowLine />}>Ex Professors</MenuItem>
-              <MenuItem icon={<RiCalendar2Line />}>Probation Period</MenuItem>
             </SubMenu>
-            <SubMenu defaultOpen label={"Records"} icon={<RiFolder2Line />}>
-              <MenuItem icon={<RiStackLine />}>Senior Students</MenuItem>
-              <MenuItem icon={<RiPlantLine />}>Junior Students</MenuItem>
-            </SubMenu>
-            <button onClick={query}>button</button>
+
+            <MenuItem>
+                  <MultiRangeSlider name={"Влажность воздуха"} min={0} max={100} onChange={({ min, max }) => { setHumidityMore(min); setHumidityLess(max);}}/>
+            </MenuItem>
+
+            <MenuItem>
+                  <MultiRangeSlider name={"Индекс качества города"} min={0} max={360} onChange={({ min, max }) => { setCityQualityIndexMore(min); setCityQualityIndexLess(max);}}/>
+            </MenuItem>
+            <MenuItem>
+            <div style={{ textAlign: "center" }}>
+              <text onClick={post_query} className="bLR">Apply</text>
+            </div>
+            </MenuItem>
           </Menu>
         </main>
       </Sidebar>
