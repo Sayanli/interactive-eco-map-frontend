@@ -1,6 +1,7 @@
 import React from "react";
 import { YMaps, Map, ObjectManager } from "@pbe/react-yandex-maps";
 import { FaBeer } from "react-icons/fa";
+import "../css/map.css"
 
 const MapYa = ({ points }) => {
 
@@ -26,9 +27,22 @@ const MapYa = ({ points }) => {
           <div>
               <img src="https://img.icons8.com/bubbles/256/city.png" width="35" height="35" alt=""/>
               <a>${point.city}</a><br>
+              <span class="description">${point.type_city}</span>
+              <span class="description">Население: ${point.population} тыс.чел. </span>
+
           </div>
           `,
           balloonContentBody: `
+             <div>
+               <img src="https://img.icons8.com/bubbles/256/star.png" width="35" height="35" alt=""/>
+               Индекс качества города: ${point.score}
+             </div>
+
+             <div>
+                <img src="https://img.icons8.com/bubbles/256/floating-island-forest.png" width="35" height="35" alt=""/>
+                Уровень озеленения: ${point.green}
+             </div>
+
              <div>
               <img src="https://img.icons8.com/bubbles/256/springtime.png" width="35" height="35" alt=""/>
               Средняя температура весной: ${point.average_spring_temp}
@@ -45,9 +59,10 @@ const MapYa = ({ points }) => {
                 <img src="https://img.icons8.com/bubbles/256/wintertime.png" width="35" height="35" alt=""/>
                 Средняя температура зимой: ${point.average_winter_temp}
              </div>
+
              <div>
-                <img src="https://img.icons8.com/bubbles/256/water.png" width="35" height="35" alt=""/>
-                Влажность воздуха(%): ${point.humidity}
+                <img src="https://img.icons8.com/bubbles/256/wind.png" width="35" height="35" alt=""/>
+                Уровень загрязнения воздуха: ${point.humidity}
              </div>
 
           </div>

@@ -9,6 +9,8 @@ import axios from "axios";
 const baseUrl = "http://localhost:3001/api/positions"
 
 const CustomSidebar = (props) => {
+
+  const isAuth = localStorage.getItem('token')
   
   const [collapsed, setCollapsed] = useState(false);
   const [toggled, setToggled] = useState(false);
@@ -31,6 +33,9 @@ const CustomSidebar = (props) => {
 
   const [cityQualityIndexMore, setCityQualityIndexMore] = useState(0)
   const [cityQualityIndexLess, setCityQualityIndexLess] = useState(360)
+
+  const [greenQualityMore, setGreenQualityMore] = useState(0)
+  const [greenQualityLess, setGreenQualityLess] = useState(360)
 
   const handleCollapsedChange = () => {
     setCollapsed(!collapsed);
@@ -57,7 +62,11 @@ const CustomSidebar = (props) => {
       winter_temp_more: winterTempMore,
       winter_temp_less: winterTempLess,
       humidity_more: humidityMore,
-      humidity_less: humidityLess
+      humidity_less: humidityLess,
+      score_more: cityQualityIndexMore,
+      score_less: cityQualityIndexLess,
+      green_more: greenQualityMore,
+      green_less: greenQualityLess
     }).then((response) => {
       props.handleChangeProp(response.data.data);
     }, (error) => {
@@ -105,6 +114,13 @@ const CustomSidebar = (props) => {
           </Menu>
 
           <Menu>
+            <MenuItem>
+                  <MultiRangeSlider name={"Индекс качества города"} min={0} max={360} onChange={({ min, max }) => { setCityQualityIndexMore(min); setCityQualityIndexLess(max);}}/>
+            </MenuItem>
+
+            <MenuItem>
+                  <MultiRangeSlider name={"Уровень озеленения"} min={0} max={60} onChange={({ min, max }) => { setGreenQualityMore(min); setGreenQualityLess(max);}}/>
+            </MenuItem>
 
             <SubMenu defaultOpen label={"Средняя температура"}>
               <MenuItem>
@@ -122,17 +138,22 @@ const CustomSidebar = (props) => {
             </SubMenu>
 
             <MenuItem>
-                  <MultiRangeSlider name={"Качество воздуха"} min={0} max={1000} onChange={({ min, max }) => { setHumidityMore(min); setHumidityLess(max);}}/>
+                  <MultiRangeSlider name={"Уровень загрязнения воздуха"} min={0} max={1000} onChange={({ min, max }) => { setHumidityMore(min); setHumidityLess(max);}}/>
             </MenuItem>
 
-            <MenuItem>
-                  <MultiRangeSlider name={"Индекс качества города"} min={0} max={360} onChange={({ min, max }) => { setCityQualityIndexMore(min); setCityQualityIndexLess(max);}}/>
-            </MenuItem>
             <MenuItem>
             <div style={{ textAlign: "center" }}>
               <text onClick={post_query} className="bLR">Apply</text>
             </div>
             </MenuItem>
+
+            {isAuth && 
+            <SubMenu defaultOpen label={"Избранное"}>
+              <MenuItem>Ковров</MenuItem>
+              <MenuItem>Владимир</MenuItem>
+              <MenuItem>Москва</MenuItem>
+            </SubMenu>}
+
           </Menu>
         </main>
       </Sidebar>
